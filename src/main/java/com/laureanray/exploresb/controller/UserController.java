@@ -27,6 +27,11 @@ public class UserController {
                 .orElseThrow(() -> new ResourceNotFoundException("Couldn't find user with that ID"));
     }
 
+    @PostMapping
+    public User createUser(@RequestBody User user) {
+        return this.userRepository.save(user);
+    }
+
     @PutMapping("/{id}")
     public User updateUser(@RequestBody User user, @PathVariable("id") long userId) {
         User existingUser = this.userRepository.findById(userId)
